@@ -4,7 +4,7 @@ const prisma = require("../models/index");
 
 exports.addRecipe = async (ctx, next) => {
   try {
-    console.log(ctx.request.body);
+    // console.log(ctx.request.body);
     const {
       authorId,
       recipeName,
@@ -35,36 +35,38 @@ exports.addRecipe = async (ctx, next) => {
         //servingSize: servingSize,
         //measureUnit: measureUnit,
         instructions: instructions,
-        // ingredients: {
-        //   create: ingredients.map((ingredient) => {
-        //     return {
-        //       create: {
-        //         ingName: ingredient.ingName,
-        //         ingAmount: ingredient.ingAmount,
-        //         ingUnit: ingredient.ingUnit,
-        //       },
-        //     };
-        //   }),
-        // },
+        ingredients: {
+          create: ingredients.map((ingredient) => {
+            return {
+              ingName: ingredient.ingName,
+              ingAmount: ingredient.ingAmount,
+              ingUnit: {
+                create: { units: ingredient.ingUnit }, //TODO: connect if units exist
+              },
+            };
+          }),
+        },
         //comments: comments,
         //rating: rating,
         //favorite: favorite,
       },
       include: { categories: true, ingredients: true },
     });
+    console.log(newRecipe);
     ctx.body = newRecipe;
     ctx.status = 201;
   } catch (error) {
     ctx.status = 500;
     ctx.body = `post recipe failed with error ${error}`;
+    console.log(error);
   }
 };
 
 exports.getRecipe = async (ctx, next) => {
   try {
-    console.log(ctx.params);
+    //console.log(ctx.params);
     const id = Number(ctx.params.id);
-    console.log(id)
+    // console.log(id);
     const recipe = await prisma.recipe.findUnique({
       where: {
         id: id,
