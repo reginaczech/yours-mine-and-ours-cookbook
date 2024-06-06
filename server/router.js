@@ -1,10 +1,14 @@
+"use strict";
+
 const Router = require("@koa/router");
+const controllers = require("./controllers/index");
+
 const router = new Router();
 
+//add new recipe
+router.post("/add-new-recipe", controllers.addRecipe);
 
-router.get("/", (ctx, next) => {
-  ctx.body = "hey world";
-  // ctx.router available
-});
+//get recipe by id
+router.get("/recipes/:id", controllers.getRecipe);
 
 module.exports = router;

@@ -1,3 +1,5 @@
+'use strict'
+
 const Koa = require("koa");
 const bodyParser = require("koa-bodyparser");
 const cors = require("@koa/cors");
@@ -17,5 +19,6 @@ app.use(async (ctx, next) => {
 });
 
 app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(port, () => console.log(`Running on port http://localhost:${port}`));
