@@ -20,9 +20,8 @@ const srapeWebPage = async () => {
     );
 
     // all the web scraping will happen here
-    const getRecipeData = await page.evaluate(() => {
+    const metaDetails = await page.evaluate(() => {
       let data = [];
-
       //recipeName
       const title = document.head
         .querySelector('meta[property="og:title"]')
@@ -34,17 +33,30 @@ const srapeWebPage = async () => {
         .getAttribute("content");
 
       //get details
+      const ingredients = document.body.querySelectorAll(
+        ".recipe-ingredients-wrapper"
+      );
+      console.log(ingredients);
+      // for (const detail of details) {
+      //   const servingSize = detail.querySelector(".recipe-metadata__serving").innerText;
+      //   console.log(servingSize)
+      // }
 
-
-      recipeDetails = { recipeName: title, image: image };
+      recipeDetails = {
+        recipeName: title,
+        image: image,
+        ingredients: ingredients
+      };
       data.push(recipeDetails);
       return data;
     });
 
-    console.log(getRecipeData);
+
+    console.log(metaDetails);
 
     //close browser
     await browser.close();
+
   } catch (error) {
     console.log(error);
   }
@@ -53,13 +65,3 @@ const srapeWebPage = async () => {
 srapeWebPage();
 
 export default srapeWebPage;
-
-;
-// console.log("🚀 ~ getRecipeData ~ details:", details);
-
-// for (const detail of details) {
-//   const servingSize = detail.querySelector(".recipe-metadata__serving").innerText;
-
-//   const cookingTime = detail.querySelector(".recipe-metadata__cook-time").innerText;
-
-// }
