@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./AddRecipeForm.css"
 import InputCategoryTags from "../InputCategoryTags/InputCategoryTags";
-import InstructionList from "../InstructionList/InstructionList";
+import InputInstructions from "../InputInstructions/InputInstructions";
 
 const AddRecipeForm = () => {
   const [tags, setTags] = useState([]); //prop drill this from the new recipe form
+  const [instructions, setInstructions] = useState([]);
 
   const [formData, setFormData] = useState({
     recipeName: "",
@@ -62,7 +63,10 @@ const AddRecipeForm = () => {
         <p>Enter Categories:</p>
         <InputCategoryTags tags={tags} setTags={setTags} />
         <p>Instructions:</p>
-        <InstructionList />
+        <InputInstructions
+          instructions={instructions}
+          setInstructions={setInstructions}
+        />
       </form>
     </div>
   );

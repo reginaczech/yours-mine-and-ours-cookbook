@@ -1,8 +1,18 @@
-#tags {
-  width: 40%;
-  /* margin: 50px auto; */
+.tagId {
+  z-index: 1;
+  font-size: larger;
+  background-color: red;
+  color: black;
+  width: 30px;
+  height: 30px;
+
 }
 
+/* #tags { */
+  /* width: 40%; */
+  /* margin: 50px auto; */
+/* } */
+/*
 #tags .ReactTags__tags {
   position: relative;
   display: flex;
@@ -106,4 +116,4 @@
 
 #tags input:before {
   border: none;
-}
+} */

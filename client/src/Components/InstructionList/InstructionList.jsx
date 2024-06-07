@@ -1,24 +1,23 @@
 import React, { useState } from 'react'
 import InstructionListItem from '../InstructionListItem/InstructionListItem'
+import InputInstructions from '../InputInstructions/InputInstructions'
 
 const InstructionList = () => {
-  const [instructList, setInstuctList] = useState([])
-
-  const handleClick = () => {
-    setInstuctList([...InstructionList, "text"])
-  }
+  const [instructions, setInstructions] = useState([])
 
   return (
     <div className='total-ingredient-list-container'>
-      <ol>
-      {instructList.length > 0 && instructList.map((instruction) => {
-        <li>      </li>
-      })}
-
-      </ol>
-      <button onClick={handleClick}>+</button>
+      <InputInstructions />
     </div>
   )
 }
 
-export default InstructionList
+export default InstructionList;
+
+      // <ol>
+      // {instructList.length > 0 && instructList.map((instruction) => {
+      //   <li>      </li>
+      // })}
+
+      // </ol>
+      // <button onClick={handleClick}>+</button>
