@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import InstructionListItem from "../InstructionListItem/InstructionListItem";
-import InputInstructions from "../InputInstructions/InputInstructions";
 
 const InstructionList = ({ instructionList, setInstructionList }) => {
   // const [instructionInput, setInstructionInput] = useState([]);
