@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 
 const InstructionList = ({ instructionList, setInstructionList }) => {
-  // const [instructionInput, setInstructionInput] = useState([]);
-
-  // const handleInputChange = (event) => {
-  //   setInstructionInput(event.target.value);
-  // };
 
   const handleAdd = () => {
-    // setFormData({...instructionList, ''})
-    setInstructionList([...instructionList, { ing: "" }]);
+    setInstructionList([...instructionList, { instructItem: "" }]);
   };
 
   const handleRemove = (index) => {
@@ -27,9 +21,11 @@ const InstructionList = ({ instructionList, setInstructionList }) => {
     setInstructionList(list);
   };
 
+  console.log(instructionList);
+
   return (
     <>
-      <div>
+      <div className="dynamic-instruction-container">
         <label htmlFor="instructItem">Instructions:</label>
         <ol>
           {instructionList.map((instruction, index) => (
@@ -68,21 +64,6 @@ const InstructionList = ({ instructionList, setInstructionList }) => {
           ))}
         </ol>
       </div>
-      {/* <div className="instruction-List">
-        <input
-          type="text"
-          name="instructionInput"
-          value={instructionInput}
-          onChange={handleInputChange}
-        />
-        <button className="addInstrucBtn" onClick={onAdd}>
-          +
-        </button>
-        <ol>
-          {instructionList &&
-            instructionList.map((instructItem) => <li>{instructItem}</li>)}
-        </ol>
-      </div> */}
     </>
   );
 };
