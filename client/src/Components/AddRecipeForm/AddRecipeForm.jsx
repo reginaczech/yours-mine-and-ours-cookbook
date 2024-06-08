@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddRecipeForm.css";
 import InputCategoryTags from "../InputCategoryTags/InputCategoryTags";
 import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
 
-const AddRecipeForm = () => {
+
+const AddRecipeForm = ({ formData, setFormData , postData}) => {
   const [tags, setTags] = useState([]); //prop drill this from the new recipe form
   const [instructionList, setInstructionList] = useState([
     { instructItem: "" },
@@ -13,24 +14,45 @@ const AddRecipeForm = () => {
     { ingName: "", ingAmount: 0, ingUnit: "" },
   ]);
 
-  const [formData, setFormData] = useState({
-    recipeName: "",
-    recipeImage: "",
-    duration: "",
-    serving: "",
-  });
+  // const [submitClicked, setSubmitClicked] = useState(false);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
-    console.log(formData);
     setFormData(() => ({ ...formData, [name]: value }));
   };
 
   //on submitFormChange -> add the tag data to the submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const { recipeName, recipeImage, duration, serving } = formData;
+    //add the categories[{id: "1, categoryName: "tag"}], instructions[], ingredients[{}]
+    const categoryArr = tags.map(({ categoryName }) => ({categoryName}));
+    const instructionArr = [];
+    instructionList.map((inst) => {
+      instructionArr.push(inst.instructItem);
+    });
 
-  console.log(formData);
+    const updatedFormData = {
+      ...formData,
+      categories: categoryArr,
+      instructions: instructionArr,
+      ingredients: ingredientList,
+    };
+
+    // setFormData(updatedFormData);
+
+    // setSubmitClicked(true);
+    postData(updatedFormData);
+
+    //post data to the server
+    // postNewRecipe(formData).then((data) => console.log('data', data));
+
+    //reset the data in the form, example:
+    // setFormData({ title: "", date: "", venue: "" });
+  };
+
+  const { recipeName, recipeImage, durationAmt, durationUnit, serving } =
+    formData;
 
   return (
     <div className="new-recipe-form-container">
@@ -38,10 +60,15 @@ const AddRecipeForm = () => {
       <h3>Import a recipe from a website</h3>
       <button>Import Recipe</button>
       <h3>Or add one below:</h3>
-      <form className="new-recipe-form">
+      <form
+        name="newRecipeForm"
+        className="new-recipe-form"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="recipeName">Recipe Name:</label>
         <input
           type="text"
+          id="recipeName"
           name="recipeName"
           value={recipeName}
           onChange={handleFormChange}
@@ -50,20 +77,31 @@ const AddRecipeForm = () => {
         <label htmlFor="recipeImage">Add Image:</label>
         <input
           type="text"
+          id="recipeImage"
           name="recipeImage"
           value={recipeImage}
           onChange={handleFormChange}
         />
-        <label htmlFor="duration">Cooking Time</label>
+        <label htmlFor="durationAmt">Cooking Time</label>
         <input
           type="text"
-          name="duration"
-          value={duration}
+          id="durationAmt"
+          name="durationAmt"
+          value={durationAmt}
+          onChange={handleFormChange}
+        />
+        <label htmlFor="durationUnit">Cooking Time Unit</label>
+        <input
+          type="text"
+          id="durationUnit"
+          name="durationUnit"
+          value={durationUnit}
           onChange={handleFormChange}
         />
         <label htmlFor="serving">Serving Size:</label>
         <input
           type="text"
+          id="serving"
           name="serving"
           value={serving}
           onChange={handleFormChange}
@@ -78,6 +116,9 @@ const AddRecipeForm = () => {
           ingredientList={ingredientList}
           setIngredientList={setIngredientList}
         />
+        <button className="submitBtn" type="submit">
+          Create New Recipe!
+        </button>
       </form>
     </div>
   );

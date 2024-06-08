@@ -8,7 +8,6 @@ const InstructionList = ({ instructionList, setInstructionList }) => {
 
   const handleRemove = (index) => {
     const list = [...instructionList];
-    console.log(list);
     list.splice(index, 1);
     setInstructionList(list);
   };
@@ -16,12 +15,9 @@ const InstructionList = ({ instructionList, setInstructionList }) => {
   const handleInstructChange = (event, index) => {
     const { name, value } = event.target;
     const list = [...instructionList];
-    console.log(list);
     list[index][name] = value;
     setInstructionList(list);
   };
-
-  console.log(instructionList);
 
   return (
     <>

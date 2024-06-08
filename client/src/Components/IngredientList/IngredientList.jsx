@@ -11,7 +11,6 @@ const IngredientList = ({ ingredientList, setIngredientList }) => {
 
   const handleRemove = (index) => {
     const list = [...ingredientList];
-    console.log(list);
     list.splice(index, 1);
     setIngredientList(list);
   };
@@ -19,12 +18,9 @@ const IngredientList = ({ ingredientList, setIngredientList }) => {
   const handleIngChange = (event, index) => {
     const { name, value } = event.target;
     const list = [...ingredientList];
-    console.log(list);
     list[index][name] = value;
     setIngredientList(list);
   };
-
-  console.log(ingredientList);
 
   return (
     <>

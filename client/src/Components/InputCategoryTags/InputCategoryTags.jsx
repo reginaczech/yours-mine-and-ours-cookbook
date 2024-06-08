@@ -17,18 +17,8 @@ const InputCategoryTags = ({ tags, setTags }, maxTags = 5) => {
 
   // Method to Add tag into Array
   const handleAddition = (tag) => {
-    // console.log(tag.id);
-    // tag.id = "0";
-    //TODO: add conditions - 1.if tag already exists 2.Show exisiting tags from database
-    // if (tags.length < 1) {
-    //   tag.id = "0";
-    // } else {
-    //   tag.id = String(Number(tag.id) + 1);
-    // }
     setTags([...tags, tag]);
   };
-
-  // console.log(tags);
 
   return (
     <>
@@ -36,6 +26,7 @@ const InputCategoryTags = ({ tags, setTags }, maxTags = 5) => {
         <ReactTags
           tags={tags}
           separators={separators}
+          labelField={'categoryName'}
           handleDelete={handleDelete}
           handleAddition={handleAddition}
           inputFieldPosition="bottom"

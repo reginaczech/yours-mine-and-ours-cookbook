@@ -56,16 +56,6 @@ const srapeWebPage = async () => {
         instructItem: inst.querySelector("p").innerText,
       }));
 
-      //get details
-      // const ingredients = document.body.querySelectorAll(
-      //   ".recipe-ingredients-wrapper"
-      // );
-      // console.log(ingredients);
-      // for (const detail of details) {
-      //   const servingSize = detail.querySelector(".recipe-metadata__serving").innerText;
-      //   console.log(servingSize)
-      // }
-
       const recipeDetails = {
         recipeName: title,
         recipeImage: image,
