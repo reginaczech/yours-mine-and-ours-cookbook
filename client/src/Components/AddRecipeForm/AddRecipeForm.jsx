@@ -3,6 +3,7 @@ import "./AddRecipeForm.css";
 import InputCategoryTags from "../InputCategoryTags/InputCategoryTags";
 import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
+import ImportRecipe from "../ImportRecipe/ImportRecipe"
 import { postNewRecipe } from "../../APIServices/fetchServices";
 
 const AddRecipeForm = () => {
@@ -67,8 +68,7 @@ const AddRecipeForm = () => {
   return (
     <div className="new-recipe-form-container">
       <h2>Add New Recipe:</h2>
-      <h3>Import a recipe from a website</h3>
-      <button>Import Recipe</button>
+      <ImportRecipe />
       <h3>Or add one below:</h3>
       <form
         name="newRecipeForm"

@@ -27,7 +27,7 @@ const InstructionList = ({ instructionList, setInstructionList }) => {
           {instructionList.map((instruction, index) => (
             <li key={index} className="instruction">
               <div className="inputInstruction">
-                <input
+                <textarea
                   type="text"
                   name="instructItem"
                   id="instructItem"
