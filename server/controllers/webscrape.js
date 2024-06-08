@@ -23,9 +23,16 @@ exports.srapeWebPage = async (ctx, next) => {
 
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
+
     // all the web scraping will happen here
     const recipeData = await page.evaluate(() => {
-      let data = [];
+
+      //conversions:
+      // const convertIngAmount = (ingAmount) => {
+      //   const splitAmount = ingAmount.split('/');
+      //   return splitAmount[0] / splitAmount[1];
+      // }
+      //^ not needed at the moment, get amount in string
 
       //recipeName
       const title = document.head
@@ -44,8 +51,9 @@ exports.srapeWebPage = async (ctx, next) => {
       const ingData = ingredients.map((ing) => ({
         ingName: ing.querySelector("p span[data-ingredient-name='true']")
           .innerText,
-        ingAmount: ing.querySelector("p span[data-ingredient-quantity='true']")
-          .innerText,
+        ingAmount: ing.querySelector(
+          "p span[data-ingredient-quantity='true']"
+        ).innerText,
         ingUnit: ing.querySelector("p span[data-ingredient-unit='true']")
           .innerText,
       }));
@@ -64,9 +72,8 @@ exports.srapeWebPage = async (ctx, next) => {
         instructionList: instructData,
         ingredientList: ingData,
       };
-      data.push(recipeDetails);
 
-      return data;
+      return recipeDetails;
     });
 
     //close browser

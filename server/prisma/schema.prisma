@@ -1,70 +1,64 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  firstName    String
-  lastName     String
-  password     String
-  profile      Profile?
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  profile   Profile?
 }
 
 model Profile {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int      @unique
-  recipes   Recipe[]
+  id      Int      @id @default(autoincrement())
+  userId  Int      @unique
+  user    User     @relation(fields: [userId], references: [id])
+  recipes Recipe[]
 }
 
 model Recipe {
-  id            Int       @id @default(autoincrement())
-  author        Profile   @relation(fields: [authorId], references: [id])
-  authorId      Int
-  recipeName    String
-  image         String?
-  durationAmt   Int
-  durationUnit  String
-  categories    Category[]
-  servingSize   Int?
-  measureUnit   String?
-  instructions  String[]
-  ingredients   Ingredient[]
-  comments      String[]
-  rating        Int?
-  favorite      Boolean    @default(false)
+  id           Int          @id @default(autoincrement())
+  authorId     Int
+  recipeName   String
+  image        String?
+  durationAmt  Int
+  durationUnit String
+  servingSize  Int?
+  measureUnit  String?
+  instructions String[]
+  comments     String[]
+  rating       Int?
+  favorite     Boolean      @default(false)
+  ingredients  Ingredient[]
+  author       Profile      @relation(fields: [authorId], references: [id])
+  categories   Category[]   @relation("CategoryToRecipe")
 }
 
 model Category {
-  id              Int       @id @default(autoincrement())
-  categoryName    String    @unique
-  recipes         Recipe[]
+  id           Int      @id @default(autoincrement())
+  categoryName String   @unique
+  recipes      Recipe[] @relation("CategoryToRecipe")
 }
 
 model Ingredient {
-  id          Int           @id @default(autoincrement())
-  recipe      Recipe        @relation(fields: [recipeId], references: [id])
-  recipeId    Int
-  ingName     String
-  ingAmount   Int
-  ingUnit     Measurement?   @relation(fields: [ingUnitId], references: [id])
-  ingUnitId   Int?           @unique
+  id        Int          @id @default(autoincrement())
+  ingAmount String
+  ingUnitId Int?         @unique
+  ingName   String
+  recipeId  Int
+  ingUnit   Measurement? @relation(fields: [ingUnitId], references: [id])
+  recipe    Recipe       @relation(fields: [recipeId], references: [id])
 }
 
 model Measurement {
-  id            Int           @id @default(autoincrement())
-  units         String
-  ingredients   Ingredient?
+  id          Int         @id @default(autoincrement())
+  units       String
+  ingredients Ingredient?
 }
