@@ -23,13 +23,8 @@ export async function postNewRecipe(data) {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-    console.log("🚀 ~ postNewRecipe ~ data:", data)
-    console.log('posting in fetch api')
-    // const postedRecipe = await response.json();//err
-    // console.log("🚀 ~ postNewRecipe ~ postedRecipe:", postedRecipe)
-    return response;
+    const postedRecipe = await response.json();
+    return postedRecipe;
   } catch (error) {
     console.log(`post new recipe api service failed: ${error}`);
   }

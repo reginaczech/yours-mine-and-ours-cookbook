@@ -3,9 +3,17 @@ import "./AddRecipeForm.css";
 import InputCategoryTags from "../InputCategoryTags/InputCategoryTags";
 import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
+import { postNewRecipe } from "../../APIServices/fetchServices";
 
-
-const AddRecipeForm = ({ formData, setFormData , postData}) => {
+const AddRecipeForm = () => {
+  const [formData, setFormData] = useState({
+    authorId: 1,
+    recipeName: "",
+    //recipeImage: "",
+    durationAmt: 1,
+    durationUnit: "",
+    serving: 1,
+  });
   const [tags, setTags] = useState([]); //prop drill this from the new recipe form
   const [instructionList, setInstructionList] = useState([
     { instructItem: "" },
@@ -13,8 +21,6 @@ const AddRecipeForm = ({ formData, setFormData , postData}) => {
   const [ingredientList, setIngredientList] = useState([
     { ingName: "", ingAmount: 0, ingUnit: "" },
   ]);
-
-  // const [submitClicked, setSubmitClicked] = useState(false);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +32,7 @@ const AddRecipeForm = ({ formData, setFormData , postData}) => {
     event.preventDefault();
 
     //add the categories[{id: "1, categoryName: "tag"}], instructions[], ingredients[{}]
-    const categoryArr = tags.map(({ categoryName }) => ({categoryName}));
+    const categoryArr = tags.map(({ categoryName }) => ({ categoryName }));
     const instructionArr = [];
     instructionList.map((inst) => {
       instructionArr.push(inst.instructItem);
@@ -39,16 +45,20 @@ const AddRecipeForm = ({ formData, setFormData , postData}) => {
       ingredients: ingredientList,
     };
 
-    // setFormData(updatedFormData);
-
-    // setSubmitClicked(true);
-    postData(updatedFormData);
-
-    //post data to the server
-    // postNewRecipe(formData).then((data) => console.log('data', data));
-
-    //reset the data in the form, example:
-    // setFormData({ title: "", date: "", venue: "" });
+    postNewRecipe(updatedFormData).then((data) => {
+      console.log("Posted!", data);
+      setFormData({
+        authorId: 1,
+        recipeName: "",
+        //recipeImage: "",
+        durationAmt: 0,
+        durationUnit: "",
+        serving: 1,
+      });
+      setTags([]);
+      setInstructionList([{ instructItem: "" }]);
+      setIngredientList([{ ingName: "", ingAmount: 0, ingUnit: "" }]);
+    });
   };
 
   const { recipeName, recipeImage, durationAmt, durationUnit, serving } =
