@@ -1,18 +1,46 @@
-import React, {useState} from "react";
+"use strict";
+
+import React, { useState } from "react";
 import { postWebScrapingURL } from "../../APIServices/fetchServices";
 
-const ImportRecipe = () => {
+const ImportRecipe = ({
+  formData,
+  setFormData,
+  instructionList,
+  setInstructionList,
+  ingredientList,
+  setIngredientList,
+}) => {
   const [recipeURL, setRecipeURL] = useState({
     url: "https://www.allrecipes.com/chocolate-peanut-butter-protein-bars-recipe-8421618",
   });
 
-
   const handleImportClick = () => {
     //post url -> to backend and webscrape
-    postWebScrapingURL(recipeURL).then(data => {
-      console.log(data);
-
-    })
+    postWebScrapingURL(recipeURL).then((data) => {
+      console.log("🚀 ~ handleImportClick ~ data:", data);
+      console.log(data.instructionList);
+      // TODO: setRecipeURL({ url: "" });
+      setFormData({
+        ...formData,
+        recipeName: data.recipeName,
+        recipeImage: data.recipeImage,
+      });
+      setInstructionList(() =>
+        data.instructionList.map((item) => ({
+          ...item,
+          instructItem: item.instructItem,
+        }))
+      );
+      setIngredientList(() =>
+        data.ingredientList.map((item) => ({
+          ...item,
+          ingName: item.ingName,
+          ingAmount: item.ingAmount,
+          ingUnit: item.ingUnit,
+        }))
+      );
+    });
   };
 
   return (

@@ -3,14 +3,14 @@ import "./AddRecipeForm.css";
 import InputCategoryTags from "../InputCategoryTags/InputCategoryTags";
 import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
-import ImportRecipe from "../ImportRecipe/ImportRecipe"
+import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
 
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
     authorId: 1,
     recipeName: "",
-    //recipeImage: "",
+    recipeImage: "",
     durationAmt: 1,
     durationUnit: "",
     serving: 1,
@@ -20,7 +20,7 @@ const AddRecipeForm = () => {
     { instructItem: "" },
   ]);
   const [ingredientList, setIngredientList] = useState([
-    { ingName: "", ingAmount: 0, ingUnit: "" },
+    { ingName: "", ingAmount: "", ingUnit: "" },
   ]);
 
   const handleFormChange = (event) => {
@@ -51,14 +51,14 @@ const AddRecipeForm = () => {
       setFormData({
         authorId: 1,
         recipeName: "",
-        //recipeImage: "",
+        recipeImage: "",
         durationAmt: 0,
         durationUnit: "",
         serving: 1,
       });
       setTags([]);
       setInstructionList([{ instructItem: "" }]);
-      setIngredientList([{ ingName: "", ingAmount: 0, ingUnit: "" }]);
+      setIngredientList([{ ingName: "", ingAmount: "", ingUnit: "" }]);
     });
   };
 
@@ -68,7 +68,14 @@ const AddRecipeForm = () => {
   return (
     <div className="new-recipe-form-container">
       <h2>Add New Recipe:</h2>
-      <ImportRecipe />
+      <ImportRecipe
+        formData={formData}
+        setFormData={setFormData}
+        instructionList={instructionList}
+        setInstructionList={setInstructionList}
+        ingredientList={ingredientList}
+        setIngredientList={setIngredientList}
+      />
       <h3>Or add one below:</h3>
       <form
         name="newRecipeForm"

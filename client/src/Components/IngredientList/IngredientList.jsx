@@ -5,7 +5,7 @@ const IngredientList = ({ ingredientList, setIngredientList }) => {
   const handleAdd = () => {
     setIngredientList([
       ...ingredientList,
-      { ingName: "", ingAmount: 0, ingUnit: "" },
+      { ingName: "", ingAmount: "", ingUnit: "" },
     ]);
   };
 
