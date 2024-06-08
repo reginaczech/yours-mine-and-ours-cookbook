@@ -8,8 +8,8 @@ const port = 3000;
 
 const app = new Koa();
 
-app.use(bodyParser());
 app.use(cors());
+app.use(bodyParser());
 
 app.use(async (ctx, next) => {
   await next();

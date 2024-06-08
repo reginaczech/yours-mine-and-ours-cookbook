@@ -2,6 +2,7 @@
 
 const Router = require("@koa/router");
 const controllers = require("./controllers/index");
+const { srapeWebPage } = require("./controllers/webscrape");
 
 const router = new Router();
 
@@ -10,5 +11,8 @@ router.post("/add-new-recipe", controllers.addRecipe);
 
 //get recipe by id
 router.get("/recipes/:id", controllers.getRecipe);
+
+//post url to be webscrapped
+router.post("/webscraped-recipe", srapeWebPage);
 
 module.exports = router;

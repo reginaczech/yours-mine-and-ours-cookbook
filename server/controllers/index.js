@@ -41,7 +41,10 @@ exports.addRecipe = async (ctx, next) => {
               ingName: ingredient.ingName,
               ingAmount: ingredient.ingAmount,
               ingUnit: {
-                create: { units: ingredient.ingUnit }, //TODO: connect if units exist
+                // connectOrCreate: {
+                //   where: { units: ingredient.ingUnit },
+                  create: { units: ingredient.ingUnit }, //TODO: connect if the measurement type exists
+                // },
               },
             };
           }),
