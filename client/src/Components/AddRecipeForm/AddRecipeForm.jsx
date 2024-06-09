@@ -5,6 +5,7 @@ import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
 import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
+import NavBar from "../NavBar/NavBar";
 
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
@@ -67,78 +68,81 @@ const AddRecipeForm = () => {
     formData;
 
   return (
-    <div className="new-recipe-form-container">
-      <h2>Add New Recipe:</h2>
-      <ImportRecipe
-        formData={formData}
-        setFormData={setFormData}
-        instructionList={instructionList}
-        setInstructionList={setInstructionList}
-        ingredientList={ingredientList}
-        setIngredientList={setIngredientList}
-      />
-      <h3>Or add one below:</h3>
-      <form
-        name="newRecipeForm"
-        className="new-recipe-form"
-        onSubmit={handleSubmit}
-      >
-        <label htmlFor="recipeName">Recipe Name:</label>
-        <input
-          type="text"
-          id="recipeName"
-          name="recipeName"
-          value={recipeName}
-          onChange={handleFormChange}
-          required
-        />
-        <label htmlFor="recipeImage">Add Image:</label>
-        <input
-          type="text"
-          id="recipeImage"
-          name="recipeImage"
-          value={recipeImage}
-          onChange={handleFormChange}
-        />
-        <label htmlFor="durationAmt">Cooking Time</label>
-        <input
-          type="text"
-          id="durationAmt"
-          name="durationAmt"
-          value={durationAmt}
-          onChange={handleFormChange}
-        />
-        <label htmlFor="durationUnit">Cooking Time Unit</label>
-        <input
-          type="text"
-          id="durationUnit"
-          name="durationUnit"
-          value={durationUnit}
-          onChange={handleFormChange}
-        />
-        <label htmlFor="serving">Serving Size:</label>
-        <input
-          type="text"
-          id="serving"
-          name="serving"
-          value={serving}
-          onChange={handleFormChange}
-        />
-        <p>Enter Categories:</p>
-        <InputCategoryTags tags={tags} setTags={setTags} />
-        <InstructionList
+    <>
+      <NavBar />
+      <div className="new-recipe-form-container">
+        <h2>Add New Recipe:</h2>
+        <ImportRecipe
+          formData={formData}
+          setFormData={setFormData}
           instructionList={instructionList}
           setInstructionList={setInstructionList}
-        />
-        <IngredientList
           ingredientList={ingredientList}
           setIngredientList={setIngredientList}
         />
-        <button className="submitBtn" type="submit">
-          Create New Recipe!
-        </button>
-      </form>
-    </div>
+        <h3>Or add one below:</h3>
+        <form
+          name="newRecipeForm"
+          className="new-recipe-form"
+          onSubmit={handleSubmit}
+        >
+          <label htmlFor="recipeName">Recipe Name:</label>
+          <input
+            type="text"
+            id="recipeName"
+            name="recipeName"
+            value={recipeName}
+            onChange={handleFormChange}
+            required
+          />
+          <label htmlFor="recipeImage">Add Image:</label>
+          <input
+            type="text"
+            id="recipeImage"
+            name="recipeImage"
+            value={recipeImage}
+            onChange={handleFormChange}
+          />
+          <label htmlFor="durationAmt">Cooking Time</label>
+          <input
+            type="text"
+            id="durationAmt"
+            name="durationAmt"
+            value={durationAmt}
+            onChange={handleFormChange}
+          />
+          <label htmlFor="durationUnit">Cooking Time Unit</label>
+          <input
+            type="text"
+            id="durationUnit"
+            name="durationUnit"
+            value={durationUnit}
+            onChange={handleFormChange}
+          />
+          <label htmlFor="serving">Serving Size:</label>
+          <input
+            type="text"
+            id="serving"
+            name="serving"
+            value={serving}
+            onChange={handleFormChange}
+          />
+          <p>Enter Categories:</p>
+          <InputCategoryTags tags={tags} setTags={setTags} />
+          <InstructionList
+            instructionList={instructionList}
+            setInstructionList={setInstructionList}
+          />
+          <IngredientList
+            ingredientList={ingredientList}
+            setIngredientList={setIngredientList}
+          />
+          <button className="submitBtn" type="submit">
+            Create New Recipe!
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

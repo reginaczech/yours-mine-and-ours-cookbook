@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddRecipeForm from './Components/AddRecipeForm/AddRecipeForm.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import NotFoundPage from './Components/NotFoundPage.jsx';
-import RecipeItem from './Components/RecipeListItem/RecipeListItem.jsx';
+import RecipeDetails from './Components/RecipeDetails/RecipeDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/recipes/:recipeId",
-    element: <RecipeItem />,
+    element: <RecipeDetails />,
   },
 ]);
 
