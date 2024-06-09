@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllRecipes } from "../../APIServices/fetchServices";
 import RecipesList from "../RecipesList/RecipesList";
 
-//add children: RecipesList, CategoriesList, CookBooksList
+//add: RecipesList, CategoriesList, CookBooksList
 
 const Dashboard = () => {
   const [recipesList, setRecipesList] = useState([]);

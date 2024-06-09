@@ -6,7 +6,7 @@ import IngredientList from "../IngredientList/IngredientList";
 import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
 import NavBar from "../NavBar/NavBar";
-
+import { useNavigate } from "react-router-dom";
 
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +24,8 @@ const AddRecipeForm = () => {
   const [ingredientList, setIngredientList] = useState([
     { ingName: "", ingAmount: "", ingUnit: "" },
   ]);
+
+  const navigate = useNavigate();
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -61,7 +63,9 @@ const AddRecipeForm = () => {
       setTags([]);
       setInstructionList([{ instructItem: "" }]);
       setIngredientList([{ ingName: "", ingAmount: "", ingUnit: "" }]);
+
       //route to the /recipe/:id page
+      navigate(`/recipes/${data.id}`);
     });
   };
 
