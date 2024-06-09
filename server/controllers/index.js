@@ -8,6 +8,7 @@ exports.addRecipe = async (ctx, next) => {
     const {
       authorId,
       recipeName,
+      image,
       durationAmt,
       durationUnit,
       categories,
@@ -21,7 +22,7 @@ exports.addRecipe = async (ctx, next) => {
       data: {
         authorId: authorId,
         recipeName: recipeName,
-        //image: image,
+        image: image,
         durationAmt: durationAmt,
         durationUnit: durationUnit,
         categories: {
@@ -43,7 +44,7 @@ exports.addRecipe = async (ctx, next) => {
               ingUnit: {
                 // connectOrCreate: {
                 //   where: { units: ingredient.ingUnit },
-                  create: { units: ingredient.ingUnit }, //TODO: connect if the measurement type exists
+                create: { units: ingredient.ingUnit }, //TODO: connect if the measurement type exists
                 // },
               },
             };
@@ -65,7 +66,7 @@ exports.addRecipe = async (ctx, next) => {
   }
 };
 
-exports.getRecipe = async (ctx, next) => {
+exports.getRecipeById = async (ctx, next) => {
   try {
     //console.log(ctx.params);
     const id = Number(ctx.params.id);
@@ -75,12 +76,28 @@ exports.getRecipe = async (ctx, next) => {
         id: id,
         authorId: 1, //TODO: change to a dynamic user_id later
       },
-      include: { categories: true, ingredients: true },
+      include: { categories: true, ingredients: true,},
     });
     ctx.body = recipe;
     ctx.status = 200;
   } catch (error) {
     ctx.status = 500;
     ctx.body = `get recipe failed with error ${error}`;
+  }
+};
+
+exports.getAllRecipes = async (ctx, next) => {
+  try {
+    const recipes = await prisma.recipe.findMany({
+      // orderBy: {
+      //   recipeName: "desc",
+      // },
+      include: { categories: true, ingredients: true },
+    });
+    ctx.body = recipes;
+    ctx.status = 200;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = `get all recipes failed with error ${error}`;
   }
 };

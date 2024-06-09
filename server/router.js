@@ -10,7 +10,10 @@ const router = new Router();
 router.post("/add-new-recipe", controllers.addRecipe);
 
 //get recipe by id
-router.get("/recipes/:id", controllers.getRecipe);
+router.get("/recipes/:id", controllers.getRecipeById);
+
+//get all recipes
+router.get("/recipes", controllers.getAllRecipes)
 
 //post url to be webscrapped
 router.post("/webscraped-recipe", srapeWebPage);

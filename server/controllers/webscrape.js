@@ -39,7 +39,7 @@ exports.srapeWebPage = async (ctx, next) => {
         .querySelector('meta[property="og:title"]')
         .getAttribute("content");
 
-      //recipeImage
+      //recipe Image
       const image = document.head
         .querySelector('meta[property="og:image"]')
         .getAttribute("content");
@@ -68,7 +68,7 @@ exports.srapeWebPage = async (ctx, next) => {
 
       const recipeDetails = {
         recipeName: title,
-        recipeImage: image,
+        image: image,
         instructionList: instructData,
         ingredientList: ingData,
       };
