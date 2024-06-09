@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getAllRecipes } from "../../APIServices/fetchServices";
-import NavBar from "../NavBar/NavBar";
 import RecipesList from "../RecipesList/RecipesList";
 
 //add children: RecipesList, CategoriesList, CookBooksList
@@ -17,7 +16,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <NavBar />
       <RecipesList recipesList={recipesList} setRecipesList={setRecipesList} />
     </>
   );

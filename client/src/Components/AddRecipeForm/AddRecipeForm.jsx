@@ -7,6 +7,7 @@ import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
 import NavBar from "../NavBar/NavBar";
 
+
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
     authorId: 1,
@@ -69,7 +70,6 @@ const AddRecipeForm = () => {
 
   return (
     <>
-      <NavBar />
       <div className="new-recipe-form-container">
         <h2>Add New Recipe:</h2>
         <ImportRecipe

@@ -24,6 +24,7 @@ const ImportRecipe = ({
     //post url -> to backend and webscrape
     postWebScrapingURL(recipeURL).then((data) => {
       // TODO: setRecipeURL({ url: "" });
+      console.log('recipe web scraping incoming data', data)
       setFormData({
         ...formData,
         recipeName: data.recipeName,
