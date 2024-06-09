@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import AddRecipeForm from "../AddRecipeForm/AddRecipeForm";
+import React, { useEffect, useState } from "react";
+import { getAllRecipes } from "../../APIServices/fetchServices";
 import NavBar from "../NavBar/NavBar";
+import RecipesList from "../RecipesList/RecipesList";
+
+//add children: RecipesList, CategoriesList, CookBooksList
 
 const Dashboard = () => {
+  const [recipesList, setRecipesList] = useState([]);
+
+  //fetch getallrecipes
+  useEffect(() => {
+    getAllRecipes().then((data) => {
+      setRecipesList(data);
+    });
+  }, []);
 
   return (
     <>
-      <div className="AddNewRecipePage">
-        <NavBar />
-        <AddRecipeForm />
-      </div>
+      <NavBar />
+      <RecipesList recipesList={recipesList} setRecipesList={setRecipesList} />
     </>
   );
 };

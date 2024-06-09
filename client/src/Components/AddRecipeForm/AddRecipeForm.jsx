@@ -59,6 +59,7 @@ const AddRecipeForm = () => {
       setTags([]);
       setInstructionList([{ instructItem: "" }]);
       setIngredientList([{ ingName: "", ingAmount: "", ingUnit: "" }]);
+      //route to the /recipe/:id page
     });
   };
 

@@ -12,6 +12,16 @@ export async function getAllRecipes() {
 }
 
 //fetch service - get recipe by id
+export async function getRecipeById(id) {
+  try {
+    const response = await fetch(`${rootURL}/recipes/${id}`);
+    const recipe = await response.json();
+    console.log(recipe);
+    return recipe;
+  } catch(error) {
+    console.log(`Get recipe by ID API service failed: ${error}`);
+  }
+}
 
 //fetch service - post new recipe
 export async function postNewRecipe(data) {
