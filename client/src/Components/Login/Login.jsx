@@ -56,6 +56,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      <div>Register New User</div>
     </div>
   );
 };

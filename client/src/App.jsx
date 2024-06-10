@@ -9,12 +9,13 @@ import NavBar from './Components/NavBar/NavBar'
 import CategoryDetails from './Components/CategoryDetails/CategoryDetails.jsx';
 import Login from './Components/Login/Login.jsx';
 import Register from './Components/Register/Register.jsx';
+import StarterPage from './Components/StarterPage/StarterPage.jsx';
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <StarterPage />
-  // },
+  {
+    path: "/",
+    element: <StarterPage />
+  },
   {
     path: "/login",
     element: <Login />,
