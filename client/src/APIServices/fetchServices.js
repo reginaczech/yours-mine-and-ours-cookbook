@@ -1,58 +1,43 @@
 const rootURL = "http://localhost:3000";
 
+//fetch service - get categories
+export const getCategories = () => fetchGetRequest(`${rootURL}/categories`);
 //fetch service - get all recipes
-export async function getAllRecipes() {
-  try {
-    const response = await fetch(rootURL + "/recipes");
-    const recipes = await response.json();
-    return recipes;
-  } catch (error) {
-    console.log(`get all recipes api service failed: ${error}`);
-  }
-}
-
+export const getAllRecipes = () => fetchGetRequest(`${rootURL}/recipes`);
 //fetch service - get recipe by id
-export async function getRecipeById(id) {
-  try {
-    const response = await fetch(`${rootURL}/recipes/${id}`);
-    const recipe = await response.json();
-    console.log(recipe);
-    return recipe;
-  } catch(error) {
-    console.log(`Get recipe by ID API service failed: ${error}`);
-  }
-}
+export const getRecipeById = (id) => fetchGetRequest(`${rootURL}/recipes/${id}`);
 
 //fetch service - post new recipe
-export async function postNewRecipe(data) {
-  try {
-    const response = await fetch(rootURL + "/add-new-recipe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const postedRecipe = await response.json();
-    return postedRecipe;
-  } catch (error) {
-    console.log(`Post new recipe API service failed: ${error}`);
-  }
-}
-
+export const postNewRecipe = (data) => fetchPostRequest(`${rootURL}/add-new-recipe`, data);
 //fetch service - post url for webscraping and recieve recipe data
-export async function postWebScrapingURL(data) {
+export const postWebScrapingURL = (data) => fetchPostRequest(`${rootURL}/webscraped-recipe`, data);
+
+
+const fetchGetRequest = async (url) => {
   try {
-    const response = await fetch(rootURL + "/webscraped-recipe", {
+    const response = await fetch(url);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(`${error.message} while fetching /${url}`);
+  }
+};
+
+
+const fetchPostRequest = async (url, data) => {
+  try {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    const scrapedRecipe = await response.json();
-    return scrapedRecipe;
+    const result = await response.json();
+    console.log(result);
+    return result;
   } catch (error) {
-    console.log(`Webscraping recipe API service failed: ${error}`);
+    console.log(`${error.message} while fetching /${url}`);
   }
-}
+};
