@@ -7,23 +7,24 @@ import NotFoundPage from "./Components/NotFoundPage.jsx";
 import RecipeDetails from "./Components/RecipeDetails/RecipeDetails.jsx";
 import NavBar from './Components/NavBar/NavBar'
 import CategoryDetails from './Components/CategoryDetails/CategoryDetails.jsx';
-
+import Login from './Components/Login/Login.jsx';
+import Register from './Components/Register/Register.jsx';
 
 const router = createBrowserRouter([
   // {
   //   path: "/",
   //   element: <StarterPage />
   // },
-  // {
-  //   path: "/login",
-  //   element: <Login />,
-  //   errorElement: <NotFoundPage />,
-  // },
-  // {
-  //   path: "/register",
-  //   element: <Register />,
-  //   errorElement: <NotFoundPage />,
-  // },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    errorElement: <NotFoundPage />,
+  },
   {
     path: "/my-profile",
     element: <Dashboard />,

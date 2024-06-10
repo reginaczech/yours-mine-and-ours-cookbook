@@ -10,16 +10,26 @@ export const getCategories = () => fetchGetRequest(`${rootURL}/categories`);
 export const getRecipesFromCategories = (id) => fetchGetRequest(`${rootURL}/categories/${id}`);
 
 
-
 //fetch service - post new recipe
 export const postNewRecipe = (data) => fetchPostRequest(`${rootURL}/add-new-recipe`, data);
 //fetch service - post url for webscraping and recieve recipe data
 export const postWebScrapingURL = (data) => fetchPostRequest(`${rootURL}/webscraped-recipe`, data);
+//fetch service - post login
+export const postLogin = (data) => fetchPostRequest(`${rootURL}/login`, data);
+//fetch service - post login
+export const postRegister = (data) => fetchPostRequest(`${rootURL}/register`, data);
 
 
 const fetchGetRequest = async (url) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,
+    //   {
+    //   method: "GET",
+    //   credentials: "include",
+    //   mode: "cors",
+    //   headers: { "Content-Type": "application/json" },
+    // }
+    );
     const result = await response.json();
     return result;
   } catch (error) {
@@ -32,6 +42,8 @@ const fetchPostRequest = async (url, data) => {
   try {
     const response = await fetch(url, {
       method: "POST",
+      // credentials: "include",
+      // mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
