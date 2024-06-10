@@ -76,7 +76,7 @@ exports.getRecipeById = async (ctx, next) => {
         id: id,
         authorId: 1, //TODO: change to a dynamic user_id later
       },
-      include: { categories: true, ingredients: true,},
+      include: { categories: true, ingredients: true },
     });
     ctx.body = recipe;
     ctx.status = 200;
@@ -92,12 +92,50 @@ exports.getAllRecipes = async (ctx, next) => {
       // orderBy: {
       //   recipeName: "desc",
       // },
-      include: { categories: true, ingredients: true },
+      include: {
+        categories: true,
+        ingredients: true,
+        // ingredients: { include: { ingUnit: true } },
+      },
     });
     ctx.body = recipes;
     ctx.status = 200;
   } catch (error) {
     ctx.status = 500;
     ctx.body = `get all recipes failed with error ${error}`;
+  }
+};
+
+exports.getCategories = async (ctx, next) => {
+  try {
+    const categories = await prisma.category.findMany();
+    ctx.body = categories;
+    ctx.status = 200;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = `get categories failed with error ${error}`;
+  }
+};
+
+exports.getRecipesFromCategories = async (ctx, next) => {
+  try {
+    const categoryId = Number(ctx.params.id);
+    const recipes = await prisma.recipe.findMany({
+      where: {
+        categories: {
+          every: {
+            id: categoryId
+          }
+        }
+      },
+      include: {
+        categories: true
+      }
+    });
+    ctx.body = recipes;
+    ctx.status = 200;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = `get recipes by category id failed with error ${error}`;
   }
 };

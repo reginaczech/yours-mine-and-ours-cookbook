@@ -6,7 +6,7 @@ const { srapeWebPage } = require("./controllers/webscrape");
 
 const router = new Router();
 
-//add new recipe
+//add new recipe+
 router.post("/add-new-recipe", controllers.addRecipe);
 
 //get recipe by id
@@ -17,5 +17,11 @@ router.get("/recipes", controllers.getAllRecipes)
 
 //post url to be webscrapped
 router.post("/webscraped-recipe", srapeWebPage);
+
+//get categories
+router.get("/categories", controllers.getCategories)
+
+//get recipies from category
+router.get("/categories/:id", controllers.getRecipesFromCategories);
 
 module.exports = router;

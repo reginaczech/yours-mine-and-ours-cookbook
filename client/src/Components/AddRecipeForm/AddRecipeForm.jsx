@@ -5,14 +5,13 @@ import InstructionList from "../InstructionList/InstructionList";
 import IngredientList from "../IngredientList/IngredientList";
 import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
-import NavBar from "../NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
     authorId: 1,
     recipeName: "",
-    recipeImage: "",
+    image: "",
     durationAmt: 1,
     durationUnit: "",
     serving: 1,
@@ -51,26 +50,29 @@ const AddRecipeForm = () => {
     };
 
     postNewRecipe(updatedFormData).then((data) => {
-      console.log("Posted!", data);
-      setFormData({
-        authorId: 1,
-        recipeName: "",
-        recipeImage: "",
-        durationAmt: 0,
-        durationUnit: "",
-        serving: 1,
-      });
-      setTags([]);
-      setInstructionList([{ instructItem: "" }]);
-      setIngredientList([{ ingName: "", ingAmount: "", ingUnit: "" }]);
+      try {
+        console.log("Posted!", data);
+        setFormData({
+          authorId: 1,
+          recipeName: "",
+          image: "",
+          durationAmt: 0,
+          durationUnit: "",
+          serving: 1,
+        });
+        setTags([]);
+        setInstructionList([{ instructItem: "" }]);
+        setIngredientList([{ ingName: "", ingAmount: "", ingUnit: "" }]);
 
-      //route to the /recipe/:id page
-      navigate(`/recipes/${data.id}`);
+        //route to the /recipe/:id page
+        navigate(`/recipes/${data.id}`);
+      } catch (error) {
+        console.log(`Post new recipe - error on client: ${error}`)
+      }
     });
   };
 
-  const { recipeName, recipeImage, durationAmt, durationUnit, serving } =
-    formData;
+  const { recipeName, image, durationAmt, durationUnit, serving } = formData;
 
   return (
     <>
@@ -99,12 +101,12 @@ const AddRecipeForm = () => {
             onChange={handleFormChange}
             required
           />
-          <label htmlFor="recipeImage">Add Image:</label>
+          <label htmlFor="image">Add Image:</label>
           <input
             type="text"
-            id="recipeImage"
-            name="recipeImage"
-            value={recipeImage}
+            id="image"
+            name="image"
+            value={image}
             onChange={handleFormChange}
           />
           <label htmlFor="durationAmt">Cooking Time</label>

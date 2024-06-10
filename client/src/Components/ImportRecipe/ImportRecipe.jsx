@@ -28,7 +28,7 @@ const ImportRecipe = ({
       setFormData({
         ...formData,
         recipeName: data.recipeName,
-        recipeImage: data.recipeImage,
+        image: data.image,
       });
       setInstructionList(() =>
         data.instructionList.map((item) => ({
