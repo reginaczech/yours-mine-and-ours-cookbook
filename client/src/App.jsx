@@ -6,6 +6,7 @@ import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import NotFoundPage from "./Components/NotFoundPage.jsx";
 import RecipeDetails from "./Components/RecipeDetails/RecipeDetails.jsx";
 import NavBar from './Components/NavBar/NavBar'
+import CategoryDetails from './Components/CategoryDetails/CategoryDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     path: "/recipes/:recipeId",
     element: <RecipeDetails />,
   },
+  {
+    path: "/categories/:categoryId",
+    element: <CategoryDetails />
+  }
 ]);
 
 const App = () => {

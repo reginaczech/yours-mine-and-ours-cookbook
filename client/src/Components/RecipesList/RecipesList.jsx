@@ -1,8 +1,10 @@
 import React from "react";
 import RecipeListItem from "../RecipeListItem/RecipeListItem";
 
-const RecipesList = ({ recipesList, setRecipesList }) => {
-
+const RecipesList = ({
+  recipesList,
+  setRecipesList,
+}) => {
   return (
     <>
       <div className="recipe-list-container">

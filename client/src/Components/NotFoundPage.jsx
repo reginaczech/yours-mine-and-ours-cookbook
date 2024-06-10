@@ -6,7 +6,7 @@ const NotFoundPage = () => {
   return (
     <div>
       404 Not Found
-      <Link to="/Dashboard">My Profile</Link>
+      <Link to="/my-profile">My Profile</Link>
     </div>
   );
 }
