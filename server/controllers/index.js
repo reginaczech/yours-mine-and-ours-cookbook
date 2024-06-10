@@ -57,10 +57,10 @@ exports.addRecipe = async (ctx, next) => {
       include: { categories: true, ingredients: true },
     });
     console.log(newRecipe);
-    ctx.body = newRecipe;
     ctx.status = 201;
+    ctx.body = newRecipe;
   } catch (error) {
-    ctx.status = 500;
+    ctx.status = 400;
     ctx.body = `post recipe failed with error ${error}`;
     console.log(error);
   }
@@ -78,10 +78,10 @@ exports.getRecipeById = async (ctx, next) => {
       },
       include: { categories: true, ingredients: true },
     });
-    ctx.body = recipe;
     ctx.status = 200;
+    ctx.body = recipe;
   } catch (error) {
-    ctx.status = 500;
+    ctx.status = 400;
     ctx.body = `get recipe failed with error ${error}`;
   }
 };
@@ -92,16 +92,29 @@ exports.getAllRecipes = async (ctx, next) => {
       // orderBy: {
       //   recipeName: "desc",
       // },
+      //TODO: add this one, but need to fix the front end
+      // include: {
+      //   categories: true,
+      //   ingredients: {
+      //     include: {
+      //       ingUnit: {
+      //         select: {
+      //           units: true,
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
+      //TODO: remove
       include: {
         categories: true,
         ingredients: true,
-        // ingredients: { include: { ingUnit: true } },
       },
     });
-    ctx.body = recipes;
     ctx.status = 200;
+    ctx.body = recipes;
   } catch (error) {
-    ctx.status = 500;
+    ctx.status = 400;
     ctx.body = `get all recipes failed with error ${error}`;
   }
 };
@@ -109,10 +122,10 @@ exports.getAllRecipes = async (ctx, next) => {
 exports.getCategories = async (ctx, next) => {
   try {
     const categories = await prisma.category.findMany();
-    ctx.body = categories;
     ctx.status = 200;
+    ctx.body = categories;
   } catch (error) {
-    ctx.status = 500;
+    ctx.status = 400;
     ctx.body = `get categories failed with error ${error}`;
   }
 };
@@ -124,18 +137,27 @@ exports.getRecipesFromCategories = async (ctx, next) => {
       where: {
         categories: {
           every: {
-            id: categoryId
-          }
-        }
+            id: categoryId,
+          },
+        },
       },
       include: {
-        categories: true
-      }
+        categories: true,
+        ingredients: {
+          include: {
+            ingUnit: {
+              select: {
+                units: true,
+              },
+            },
+          },
+        },
+      },
     });
-    ctx.body = recipes;
     ctx.status = 200;
+    ctx.body = recipes;
   } catch (error) {
-    ctx.status = 500;
+    ctx.status = 400;
     ctx.body = `get recipes by category id failed with error ${error}`;
   }
 };
