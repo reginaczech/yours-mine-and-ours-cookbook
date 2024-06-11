@@ -13,16 +13,16 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'My Dashboard', href: '/my-profile', current: true },
-  { name: 'Add New Recipe', href: '/add-new-recipe', current: false },
-  { name: 'My Cookbooks', href: '/my-cookbooks', current: false },
+  { name: 'Home', href: '/', current: true },
+  { name: 'Login', href: '/login', current: false },
+  { name: 'Register', href: '/register', current: false },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const NavBar = () => {
+const NavBarStarter = () => {
   return (
     <Disclosure as="nav" className="bg-theme-dark-yellow">
       {({ open }) => (
@@ -79,7 +79,7 @@ const NavBar = () => {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button> */}
 
-                {/* Profile dropdown */}
+                {/* Profile dropdown
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -130,7 +130,7 @@ const NavBar = () => {
                       <MenuItem>
                         {({ focus }) => (
                           <a
-                            href="/login"
+                            href="#"
                             className={classNames(
                               focus ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -142,7 +142,7 @@ const NavBar = () => {
                       </MenuItem>
                     </MenuItems>
                   </Transition>
-                </Menu>
+                </Menu>*/}
               </div>
             </div>
           </div>
@@ -173,4 +173,4 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+export default NavBarStarter;

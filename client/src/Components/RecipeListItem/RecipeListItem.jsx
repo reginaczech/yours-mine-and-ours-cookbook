@@ -8,7 +8,7 @@ const RecipeListItem = ({ recipe }) => {
 
   return (
     <>
-      <div className="flex flex-col border-2 h-64 w-56 rounded-2xl border-theme-light-grey content-center hover:border-4 hover:border-theme-dark-yellow hover:text-theme-dark-yellow">
+      <div className="flex flex-col drop-shadow-md border-2 h-64 w-56 rounded-2xl border-theme-light-grey content-center hover:border-4 hover:border-theme-dark-yellow hover:text-theme-dark-yellow">
         <img
           className="h-56 overflow-hidden object-cover rounded-t-xl cursor-pointer "
           onClick={() => navigate(`/recipes/${recipe.id}`)}

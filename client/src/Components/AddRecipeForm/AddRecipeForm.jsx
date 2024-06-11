@@ -6,6 +6,7 @@ import IngredientList from "../IngredientList/IngredientList";
 import ImportRecipe from "../ImportRecipe/ImportRecipe";
 import { postNewRecipe } from "../../APIServices/fetchServices";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
@@ -76,6 +77,7 @@ const AddRecipeForm = () => {
 
   return (
     <>
+      <NavBar />
       <div className="flex flex-col items-center">
         <h2 className="mt-5 mb-5 text-center text-2xl font-bold leading-9 tracking-tight text-theme-dark-grey">
           Add New Recipe

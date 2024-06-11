@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllRecipes, getCategories } from "../../APIServices/fetchServices";
 import RecipesList from "../RecipesList/RecipesList";
 import { useNavigate, Link } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 //add: RecipesList, CategoriesList, CookBooksList
 
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <NavBar />
       <div>
         <div className="m-10 rounded-2xl">
           <h2 className="pt-5 pl-10 font-['Georgia'] font-bold text-3xl">
@@ -37,7 +39,7 @@ const Dashboard = () => {
         <h2 className="pt-5 pl-10 font-['Georgia'] font-bold text-3xl">
           My Categories
         </h2>
-        <div className="m-10 flex gap-x-10 snap-x snap-mandatory overflow-x-scroll overflow-hidden no-scrollbar ">
+        <div className="m-10 flex gap-x-10 drop-shadow-md snap-x snap-mandatory overflow-x-scroll overflow-hidden no-scrollbar ">
           {categoryList &&
             categoryList.map((category) => (
               <div key={category.id}>
@@ -58,11 +60,11 @@ const Dashboard = () => {
             ))}
         </div>
       </div>
-      <div className="m-10 rounded-2xl">
+      {/* <div className="m-10 rounded-2xl">
         <h2 className="pt-5 pl-10 font-['Georgia'] font-bold text-3xl">
           My Cookbooks:
         </h2>
-      </div>
+      </div> */}
     </>
   );
 };

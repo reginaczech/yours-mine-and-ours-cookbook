@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { postLogin } from "../../APIServices/fetchServices";
 import { useNavigate, Link } from "react-router-dom";
+import NavBarStarter from "../NavBarStarter/NavBarStarter";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -33,6 +34,7 @@ const Login = () => {
 
   return (
     <>
+      <NavBarStarter />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
