@@ -7,7 +7,7 @@ const RecipesList = ({
 }) => {
   return (
     <>
-      <div className="recipe-list-container">
+      <div className="flex gap-x-10 m-10 snap-x snap-mandatory overflow-x-scroll overflow-hidden  no-scrollbar">
         {recipesList &&
           recipesList.map((recipe) => (
             <div key={recipe.id}>

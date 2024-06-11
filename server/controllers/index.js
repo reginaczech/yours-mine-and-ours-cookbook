@@ -5,7 +5,7 @@ const prisma = require("../models/index");
 exports.addRecipe = async (ctx, next) => {
   try {
     // console.log(ctx.request.body);
-    const {
+    let {
       authorId,
       recipeName,
       image,
@@ -16,6 +16,7 @@ exports.addRecipe = async (ctx, next) => {
       ingredients,
     } = ctx.request.body;
 
+    durationAmt = Number(durationAmt);
     //find or create an ingredient ->
     //create the recipe
     const newRecipe = await prisma.recipe.create({
@@ -133,6 +134,7 @@ exports.getCategories = async (ctx, next) => {
 exports.getRecipesFromCategories = async (ctx, next) => {
   try {
     const categoryId = Number(ctx.params.id);
+   console.log(categoryId);
     const recipes = await prisma.recipe.findMany({
       where: {
         categories: {
@@ -154,6 +156,7 @@ exports.getRecipesFromCategories = async (ctx, next) => {
         },
       },
     });
+    console.log(recipes);
     ctx.status = 200;
     ctx.body = recipes;
   } catch (error) {

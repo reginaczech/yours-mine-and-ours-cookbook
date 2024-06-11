@@ -10,11 +10,13 @@ import CategoryDetails from './Components/CategoryDetails/CategoryDetails.jsx';
 import Login from './Components/Login/Login.jsx';
 import Register from './Components/Register/Register.jsx';
 import StarterPage from './Components/StarterPage/StarterPage.jsx';
+import RecipesList from './Components/RecipesList/RecipesList.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <StarterPage />
+    element: <StarterPage />,
+    errorElement: <NotFoundPage />,
   },
   {
     path: "/login",
@@ -35,15 +37,23 @@ const router = createBrowserRouter([
   {
     path: "/add-new-recipe",
     element: <AddRecipeForm />,
+    errorElement: <NotFoundPage />,
   },
   {
     path: "/recipes/:recipeId",
     element: <RecipeDetails />,
+    errorElement: <NotFoundPage />,
   },
   {
     path: "/categories/:categoryId",
-    element: <CategoryDetails />
-  }
+    element: <CategoryDetails />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/my-cookbooks/:categoryId",
+    element: <CategoryDetails />,
+    errorElement: <NotFoundPage />,
+  },
 ]);
 
 const App = () => {

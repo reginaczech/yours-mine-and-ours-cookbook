@@ -54,7 +54,7 @@ const RecipeDetails = () => {
           {ingredients &&
             ingredients.map((el) => (
               <div key={el.id} className="grid grid-cols-4 grid-rows-1 gap-x-1">
-                <span className="col-start-1 col-span-2">{el.ingName}</span>
+                <span className=" font-bold col-start-1 col-span-2">{el.ingName}</span>
                 <span className="col-start-3">{el.ingAmount}</span>
                 <span className="col-start-4">{el.ingUnitId}</span>
               </div>
