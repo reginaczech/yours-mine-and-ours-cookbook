@@ -1,8 +1,16 @@
-//local root
-// const rootURL = "http://localhost:3000";
+'use strict'
 
-//vercel deployment url
-const rootURL = "https://yours-mine-and-ours-cookbook-my27.vercel.app/";
+let rootURL = "";
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  // dev code
+  //local root
+   rootURL = "http://localhost:3000";
+} else {
+  // production code
+  //vercel deployment url
+   rootURL = "https://yours-mine-and-ours-cookbook-my27.vercel.app/";
+}
 
 //fetch service - get all recipes
 export const getAllRecipes = () => fetchGetRequest(`${rootURL}/recipes`);

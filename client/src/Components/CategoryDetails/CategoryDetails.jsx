@@ -9,13 +9,13 @@ const CategoryDetails = () => {
 
   //fetch: get all recipes within the category by category id
   useEffect(() => {
-    getRecipesFromCategories(params.categoryId).then(data =>setRecipeByCatList(data) );
+    getRecipesFromCategories(params.categoryId).then(data => setRecipeByCatList(data) );
   },[])
 
+  console.log(recipeByCatList)
 
   return (
     <>
-      <div>Test</div>
       <RecipesList
         recipesList={recipeByCatList}
         setRecipesList={setRecipeByCatList}

@@ -22,7 +22,7 @@ const InputCategoryTags = ({ tags, setTags }, maxTags = 5) => {
 
   return (
     <>
-      <div id="tags">
+      <div id="tags" >
         <ReactTags
           tags={tags}
           separators={separators}
