@@ -9,6 +9,7 @@ exports.addRecipe = async (ctx, next) => {
       authorId,
       recipeName,
       image,
+      servingSize,
       durationAmt,
       durationUnit,
       categories,
@@ -34,7 +35,7 @@ exports.addRecipe = async (ctx, next) => {
             };
           }),
         },
-        //servingSize: servingSize,
+        servingSize: servingSize,
         //measureUnit: measureUnit,
         instructions: instructions,
         ingredients: {
@@ -77,7 +78,19 @@ exports.getRecipeById = async (ctx, next) => {
         id: id,
         authorId: 1, //TODO: change to a dynamic user_id later
       },
-      include: { categories: true, ingredients: true },
+      include: {
+        categories: true,
+        ingredients: {
+          include: {
+            ingUnit: {
+              select: {
+                units: true,
+              },
+            },
+          },
+        },
+      },
+      // include: { categories: true, ingredients: true },
     });
     ctx.status = 200;
     ctx.body = recipe;
@@ -94,23 +107,23 @@ exports.getAllRecipes = async (ctx, next) => {
       //   recipeName: "desc",
       // },
       //TODO: add this one, but need to fix the front end
-      // include: {
-      //   categories: true,
-      //   ingredients: {
-      //     include: {
-      //       ingUnit: {
-      //         select: {
-      //           units: true,
-      //         },
-      //       },
-      //     },
-      //   },
-      // },
-      //TODO: remove
       include: {
         categories: true,
-        ingredients: true,
+        ingredients: {
+          include: {
+            ingUnit: {
+              select: {
+                units: true,
+              },
+            },
+          },
+        },
       },
+      //TODO: remove
+      // include: {
+      //   categories: true,
+      //   ingredients: true,
+      // },
     });
     ctx.status = 200;
     ctx.body = recipes;
@@ -134,11 +147,11 @@ exports.getCategories = async (ctx, next) => {
 exports.getRecipesFromCategories = async (ctx, next) => {
   try {
     const categoryId = Number(ctx.params.id);
-   console.log(categoryId);
+   console.log(typeof categoryId);
     const recipes = await prisma.recipe.findMany({
       where: {
         categories: {
-          every: {
+          some: {
             id: categoryId,
           },
         },
