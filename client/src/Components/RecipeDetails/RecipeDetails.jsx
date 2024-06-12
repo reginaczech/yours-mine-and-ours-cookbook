@@ -11,12 +11,16 @@ const RecipeDetails = () => {
 
   //fetch: get recipe by id
   useEffect(() => {
-    getRecipeById(params.recipeId).then((data) => setRecipesDetails(data));
+    getRecipeById(params.recipeId).then((data) => {
+      console.log("🚀 ~ getRecipeById ~ data:", data)
+      setRecipesDetails(data)
+    });
+
   }, []);
 
-  console.log(recipeDetails);
   const { recipeName, image, instructions, ingredients, servingSize } =
     recipeDetails;
+
 
   return (
     <>
@@ -45,26 +49,28 @@ const RecipeDetails = () => {
               ))}
           </ol>
         </div>
-        <div className="col-start-9 col-span-3 row-start-6 row-span-4 py-8 px-8 bg-theme-offwhite rounded-xl">
+        <div className="col-start-9 col-span-3 row-start-6 row-span-3 auto-rows-min	py-8 px-8 bg-theme-offwhite rounded-xl">
           <h2 className="font-['Georgia'] text-2xl mb-8 text-md font-bold">
             Ingredients
           </h2>
           <div className="font-['Georgia'] flex pb-4 border-b-2">
-            <h3 className="text-xl">Servings</h3>
-            <p>{servingSize}</p>
+            <h3 className="text-xl font-semibold">Servings</h3>
+            <p className="pl-10 text-xl">{servingSize}</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-4">
             {ingredients &&
               ingredients.map((el) => (
                 <div
                   key={el.id}
-                  className="grid grid-cols-4 grid-rows-1 gap-x-1"
+                  className="grid grid-cols-4 grid-rows-1 gap-x-"
                 >
                   <span className=" font-bold col-start-1 col-span-2">
                     {el.ingName}
                   </span>
-                  <span className="col-start-3">{el.ingAmount}</span>
-                  <span className="col-start-4">{el.ingUnitId}</span>
+                  <div className="col-start-3">
+                    <span> {el.ingAmount}</span>
+                    <span className="pl-2">{el.ingUnit.units}</span>
+                  </div>
                 </div>
               ))}
           </div>

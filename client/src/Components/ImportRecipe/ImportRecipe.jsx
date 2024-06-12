@@ -12,7 +12,8 @@ const ImportRecipe = ({
   setIngredientList,
 }) => {
   const [recipeURL, setRecipeURL] = useState({
-    url: "https://www.allrecipes.com/chocolate-peanut-butter-protein-bars-recipe-8421618",
+
+    // url: "https://www.allrecipes.com/chocolate-peanut-butter-protein-bars-recipe-8421618",
   });
 
     const handleRecipeURLChange = (event) => {
@@ -60,6 +61,7 @@ const ImportRecipe = ({
           type="text"
           name="recipeURL"
           id="recipeURL"
+          placeholder="https://www.allrecipes.com"
           value={recipeURL.url}
           className="w-4/5 block rounded-md border-0 py-1.5 text-theme-dark-grey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-theme-dark-yellow sm:text-sm sm:leading-6"
           onChange={handleRecipeURLChange}

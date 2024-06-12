@@ -22,17 +22,19 @@ const Register = () => {
     event.preventDefault();
     postRegister(registerForm).then((data) => {
       try {
-        console.log("post", data)
-        setRegisterForm({
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-        });
         //route to /my-profile
-        navigate("/my-profile");
+        if (data.error) {
+          alert('User already exists!');
+        } else {
+          setRegisterForm({
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+          });
+          navigate("/my-profile");
+        }
       } catch (error) {
-        alert(error);
         console.log(`Login failed - error on client: ${error}`);
       }
     });
@@ -77,7 +79,7 @@ const Register = () => {
                   value={firstName}
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-theme-dark-grey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-theme-dark-grey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -98,7 +100,7 @@ const Register = () => {
                   value={lastName}
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-theme-dark-grey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-3 text-theme-dark-grey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -158,8 +160,10 @@ const Register = () => {
             </div>
           </form>
 
-          <p className="mt-4
-           text-center text-sm text-gray-500">
+          <p
+            className="mt-4
+           text-center text-sm text-gray-500"
+          >
             Already a member?{" "}
             <Link
               to="/login"
